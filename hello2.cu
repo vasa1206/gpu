@@ -13,31 +13,18 @@ __global__ void kernel(void) {
 int main(void) {
 		int c;
 		int *dev_c;
-    		cudaDeviceProp  prop;
-    		int count;
+		
+		HANDLE_ERROR(cudaMalloc((void**)&dev_c, sizeof(int)));
 
-		HANDLE_ERROR( cudaGetDeviceCount( &count ) );
+		add<1,1>>>(2, 7, dev_c);
 
-		HANDLE_ERROR(cudaMalloc ((void **) &dev_c, sizeof(int)));
+		HANDLE_ERROE(cudaMencpy(&c, dev_c, sizeof(int), cudaMencpyDeviceToHost));
 
-		add <<<1,1>>>(2, 7, dev_c);
-
-		HANDLE_ERROR(cudaMemcpy (&c, dev_c, sizeof(int), cudaMemcpyDeviceToHost));
-		printf(" 2+ 7 = %d\n", c);
+		printf("2 + 7 = %d\n", c);
 
 		cudaFree(dev_c);
 
-		//kernel <<<1,1>>>();
+		printf("Hello World!\n");
 
-		//printf("Hello World!\n");
-
-
-	HANDLE_ERROR( cudaGetDeviceCount( &count ) ); 
-//	for (int i=0; i< count; i++) {
- //       HANDLE_ERROR( cudaGetDeviceProperties( &prop, i ) );
-        //Do something with our device's properties
-//		printf("%s\n", *prop.name);
-//		} 
-//	}
-	return(0);
+		return(0);
 }
