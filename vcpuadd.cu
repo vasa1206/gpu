@@ -1,6 +1,6 @@
 #include "book.h"
 
-#define N 1000
+#define N 10000
 
 void add (int *a, int *b, int *c) {
 	int tid = 0; // this is CPU zero, so we star at zero

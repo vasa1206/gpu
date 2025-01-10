@@ -13,5 +13,11 @@ gpuconfig:
 cpu_vector_sums:
 	nvcc -I ./common ./cpu_vector_sums.cu cpu_vector_sums.cu -o cpu_vector_sums
 
+vcpuadd:
+	nvcc -I ./common vcpuadd.cu -o vcpuadd
+
+vgpuadd:
+	nvcc -I ./common vgpuadd.cu -o vgpuadd
+
 clean:
-	rm gpuconfig hello2 hello
+	rm gpuconfig hello vgpuadd vcpuadd
